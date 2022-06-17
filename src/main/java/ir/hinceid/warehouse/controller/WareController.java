@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/ware")
-public class wareController {
+public class WareController {
 
     @Autowired
     private IWareRepository iWarehouseRepository;
@@ -24,7 +24,8 @@ public class wareController {
 
     //save
     @PostMapping("save")
-    public Ware saveWare(@RequestBody Ware ware) {
+    public Ware saveWare(Ware ware) {
+//    public Ware saveWare(@RequestBody Ware ware) {
         ware.setId(UUID.randomUUID());
         ware.setCreatedDate(new Date());
         return iWarehouseRepository.save(ware);

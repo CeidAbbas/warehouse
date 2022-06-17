@@ -24,7 +24,8 @@ public class WarehouseController {
 
     // save or update
     @PostMapping("save")
-    public Warehouse saveWarehouse(@RequestBody Warehouse warehouse) {
+    public Warehouse saveWarehouse(Warehouse warehouse) {
+//    public Warehouse saveWarehouse(@RequestBody Warehouse warehouse) {
         warehouse.setId(UUID.randomUUID());
         warehouse.setCreatedDate(new Date());
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

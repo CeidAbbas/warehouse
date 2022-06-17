@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @Setter
-@Table(name = "user")
+@Table(name = "person")
 public class Person extends BaseClass {
 
     @NotNull
