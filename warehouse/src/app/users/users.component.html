@@ -1,0 +1,48 @@
+<div class="m-3 p-2">
+  <div class="card">
+    <header class="bg-light row m-0">
+      <h2 class="col-sm-7 lh-4" *ngIf="!editMode; else editModeTitle">{{ title }} {{ userTitle }}</h2>
+      <ng-template #editModeTitle>
+        <h2 class="col-sm-7 lh-4">
+          {{ editModeTitle }}
+        </h2>
+      </ng-template>
+      <div class="text-end col-sm-5 lh-lg"
+           *ngIf="1 && !editMode">
+        <i class="fa fa-plus m-1 fa-2x" (click)="switchToEditMode()"></i>
+        <i class="fa fa-search m-1 fa-2x"></i>
+        <i class="fa fa-refresh m-1 fa-2x"></i>
+      </div>
+    </header>
+    <article class="">
+      <table class="table table-bordered table-striped table-hover"
+             *ngIf="!editMode">
+        <thead>
+        <tr class>
+          <th>نام</th>
+          <th>نام خانوادگی</th>
+          <th>جنسیت</th>
+          <th>وضعیت</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="" *ngFor="let user of users">
+          <td> {{ user.firstName }}</td>
+          <td> {{ user.lastName }}</td>
+          <td *ngIf="user.gender == 1 ; else female">مرد</td>
+          <ng-template #female>
+            <td>زن</td>
+          </ng-template>
+          <td *ngIf="user.status;else deactive">فعال</td>
+          <ng-template #deactive>
+            <td>غیر فعال</td>
+          </ng-template>
+        </tr>
+        </tbody>
+      </table>
+      <div class="" *ngIf="editMode">
+        <app-users-edit></app-users-edit>
+      </div>
+    </article>
+  </div>
+</div>
