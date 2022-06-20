@@ -15,6 +15,7 @@ import { WarehouseEditComponent } from './warehouse/warehouse-edit.component';
 import { WareComponent } from './ware/ware.component';
 import { UsersComponent } from './users/users.component';
 import {UsersEditComponent} from "./users/users-edit.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {UsersEditComponent} from "./users/users-edit.component";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
