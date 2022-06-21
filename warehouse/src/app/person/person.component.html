@@ -26,14 +26,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="" *ngFor="let user of users">
-          <td> {{ user.firstName }}</td>
-          <td> {{ user.lastName }}</td>
-          <td *ngIf="user.gender == 1 ; else female">مرد</td>
+        <tr class="" *ngFor="let person of persons">
+          <td> {{ person.firstName }}</td>
+          <td> {{ person.lastName }}</td>
+          <td *ngIf="person.gender; else female">مرد</td>
           <ng-template #female>
             <td>زن</td>
           </ng-template>
-          <td *ngIf="user.status;else deactive">فعال</td>
+          <td *ngIf="person.status;else deactive">فعال</td>
           <ng-template #deactive>
             <td>غیر فعال</td>
           </ng-template>
@@ -41,7 +41,7 @@
         </tbody>
       </table>
       <div class="" *ngIf="editMode">
-        <app-users-edit></app-users-edit>
+        <app-person-edit></app-person-edit>
       </div>
     </article>
   </div>
