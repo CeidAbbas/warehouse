@@ -3,15 +3,17 @@
     <header class="bg-light row m-0">
       <h2 class="col-sm-7 lh-4" *ngIf="!editMode; else editModeTitle">{{ title }} {{ warehouseTitle }}</h2>
       <ng-template #editModeTitle>
-        <h2 class="col-sm-7 lh-4" >
+        <h2 class="col-sm-7 lh-4">
           تعریف انبار جدید
         </h2>
       </ng-template>
       <div class="text-end col-sm-5 lh-lg"
-           *ngIf="1 && !editMode">
-        <i class="fa fa-plus m-1 fa-2x" (click)="switchToEditMode()"></i>
-        <i class="fa fa-search m-1 fa-2x"></i>
-        <i class="fa fa-refresh m-1 fa-2x"></i>
+           *ngIf="!editMode">
+        <span>
+        <h4><i class="bi bi-plus m-1" (click)="switchToEditMode()"></i></h4>
+        <h4><i class="bi bi-search m-1"></i></h4>
+        <i class="bi bi-reload m-1 fa-2x"></i>
+        </span>
       </div>
     </header>
     <article class="">
@@ -30,7 +32,10 @@
           <td> {{ warehouse.name }}</td>
           <td> {{ warehouse.capacity }}</td>
           <td> {{ warehouse.location }}</td>
-          <td> {{ warehouse.mas }}</td>
+          <td *ngIf="warehouse.status; else deactive"> فعال</td>
+          <ng-template #deactive>
+            <td> غیر فعال</td>
+          </ng-template>
         </tr>
         </tbody>
       </table>

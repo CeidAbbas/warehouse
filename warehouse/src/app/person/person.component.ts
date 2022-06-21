@@ -62,7 +62,11 @@ export class PersonComponent implements OnInit {
         status: true,
         gender: 2,
       },
-    ]
+    ]*/
+    this.personService.getAllPerson().subscribe(persons => {
+      this.persons = persons;
+      console.log(persons);
+    });
   }
 
   switchToEditMode() {

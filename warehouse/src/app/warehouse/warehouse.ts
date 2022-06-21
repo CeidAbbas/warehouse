@@ -4,4 +4,5 @@ export class Warehouse {
   public capacity: number | undefined;
   public location: string | undefined;
   public mas: number | undefined;
+  public status: boolean | undefined;
 }

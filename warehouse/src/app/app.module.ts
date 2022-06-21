@@ -13,9 +13,9 @@ import { WarehouseCapacityComponent } from './warehouse-capacity/warehouse-capac
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { WarehouseEditComponent } from './warehouse/warehouse-edit.component';
 import { WareComponent } from './ware/ware.component';
-import { UsersComponent } from './users/users.component';
-import {UsersEditComponent} from "./users/users-edit.component";
+import { PersonComponent } from './person/person.component';
 import {HttpClientModule} from "@angular/common/http";
+import {PersonEditComponent} from "./person/person-edit.component";
 
 @NgModule({
   declarations: [
@@ -29,8 +29,9 @@ import {HttpClientModule} from "@angular/common/http";
     SidebarComponent,
     WarehouseEditComponent,
     WareComponent,
-    UsersComponent,
-    UsersEditComponent
+    PersonComponent,
+    PersonComponent,
+    PersonEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +40,9 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
   ],
   providers: [],
+  exports: [
+    PersonEditComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

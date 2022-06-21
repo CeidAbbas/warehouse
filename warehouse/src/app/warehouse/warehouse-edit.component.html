@@ -3,10 +3,10 @@
     <label class="col-6 col-sm-6 control-label text-danger">نام انبار</label>
     <label class="col-6 col-sm-6 control-label text-danger">ظرفیت</label>
     <div class="col-6 col-sm-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="warehouse.name">
     </div>
     <div class="col-6 col-sm-6">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [(ngModel)]="warehouse.capacity">
     </div>
   </div>
   <div class="row m-0 mt-3 p-0 col-12 col-sm-12">
@@ -28,7 +28,7 @@
   </div>
   <div class="row m-0 mt-3 p-0 col-12 col-sm-12">
     <span style="width: 8rem;">
-    <button class="btn btn-primary w-100">
+    <button class="btn btn-primary w-100" (click)="save()">
       ثبت
       <i class="fa fa-save"></i>
     </button>

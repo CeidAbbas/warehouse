@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/person")
-public class PersonController {
+public class PersonController extends Controller{
 
     @Autowired
     private IPersonRepository iPersonRepository;
@@ -23,8 +23,8 @@ public class PersonController {
     }
 
     @PostMapping("save")
-    public Person savePerson(Person person) {
-//    public Person savePerson(@RequestBody Person person) {
+//    public Person savePerson(Person person) {
+    public Person savePerson(@RequestBody Person person) {
         person.setId(UUID.randomUUID());
         person.setCreatedDate(new Date());
         return iPersonRepository.save(person);

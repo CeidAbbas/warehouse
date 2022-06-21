@@ -23,4 +23,6 @@ public class Warehouse extends BaseClass {
 
     @Column(name = "status")
     public Boolean status;
+
+//    @Column(name = "location")
 }

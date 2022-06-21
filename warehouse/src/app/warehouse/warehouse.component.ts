@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Warehouse} from "./warehouse";
+import {WarehouseService} from './warehouse.service';
 
 @Component({
   selector: 'app-warehouse',
@@ -14,11 +15,15 @@ export class WarehouseComponent implements OnInit {
   @Input() sourceLoad: boolean = true;
   public editMode: boolean = false;
 
-  constructor() {
+  constructor(private warehouseService: WarehouseService) {
   }
 
   ngOnInit(): void {
-    this.warehouses = [
+    this.warehouseService.getAllWarehouses().subscribe(warehouses => {
+      console.log(warehouses);
+      this.warehouses = warehouses;
+    });
+  /*  this.warehouses = [
       {
         id: 1,
         name: 'مرکزی',
@@ -47,7 +52,7 @@ export class WarehouseComponent implements OnInit {
         location: 'ساختمان بهار',
         mas: 5,
       },
-    ];
+    ];*/
   }
 
   switchToEditMode() {

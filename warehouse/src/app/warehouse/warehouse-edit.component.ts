@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Warehouse} from "./warehouse";
+import {WarehouseService} from './warehouse.service';
 
 @Component({
   selector: 'app-warehouse-edit',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WarehouseEditComponent implements OnInit {
 
-  constructor() { }
+  public warehouse: Warehouse;
+
+  constructor(private warehouseService: WarehouseService) {
+    this.warehouse = new Warehouse;
+  }
 
   ngOnInit(): void {
   }
 
+  save() {
+    console.log(this.warehouse);
+    this.warehouseService.saveWarehouse(this.warehouse).subscribe(data =>{
+      console.log(data);
+    });
+  }
 }
