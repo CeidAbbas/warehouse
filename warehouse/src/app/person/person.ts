@@ -1,4 +1,4 @@
-export class Users {
+export class Person {
   public id: string | undefined;
   public userName: string | undefined;
   public firstName: string | undefined;

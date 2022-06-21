@@ -33,4 +33,7 @@ public class Person extends BaseClass {
     @NotNull
     @Column(name = "status")
     public Boolean status;
+
+    @Column(name = "gender")
+    public Boolean gender;
 }

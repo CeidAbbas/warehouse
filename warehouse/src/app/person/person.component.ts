@@ -1,26 +1,27 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Warehouse} from "../warehouse/warehouse";
-import {Users} from './users';
+import { PersonService } from './person.service';
+import {Person} from "./person";
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-person',
+  templateUrl: './person.component.html',
+  styleUrls: ['./person.component.css']
 })
-export class UsersComponent implements OnInit {
+export class PersonComponent implements OnInit {
 
-  public users: Users[] | undefined;
+  public persons: Person[] | undefined;
   public title: string = 'کاربران';
   public userTitle: string | undefined;
   @Input() sourceLoad: boolean = true;
   public editModeTitle: string = 'ویرایش کاربر';
   public editMode: boolean = false;
 
-  constructor() {
+  constructor(private personService: PersonService) {
+    // this.persons = new Person();
   }
 
   ngOnInit(): void {
-    this.users = [
+   /* this.persons = [
       {
         id: '1',
         firstName: 'رحمان',
