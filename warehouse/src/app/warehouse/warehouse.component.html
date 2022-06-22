@@ -1,0 +1,47 @@
+<div class="m-3 p-2">
+  <div class="card">
+    <header class="bg-light row m-0">
+      <h2 class="col-sm-7 lh-4" *ngIf="!editMode; else editModeTitle">{{ title }} {{ warehouseTitle }}</h2>
+      <ng-template #editModeTitle>
+        <h2 class="col-sm-7 lh-4">
+          تعریف انبار جدید
+        </h2>
+      </ng-template>
+      <div class="text-end col-sm-5 lh-lg"
+           *ngIf="!editMode">
+        <span>
+        <h4><i class="bi bi-plus m-1" (click)="switchToEditMode()"></i></h4>
+        <h4><i class="bi bi-search m-1"></i></h4>
+        <i class="bi bi-reload m-1 fa-2x"></i>
+        </span>
+      </div>
+    </header>
+    <article class="">
+      <table class="table table-bordered table-striped table-hover"
+             *ngIf="!editMode">
+        <thead>
+        <tr class>
+          <th>نام انبار</th>
+          <th>ظرفیت</th>
+          <th>مکان</th>
+          <th>مسئول</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="" *ngFor="let warehouse of warehouses">
+          <td> {{ warehouse.name }}</td>
+          <td> {{ warehouse.capacity }}</td>
+          <td> {{ warehouse.location }}</td>
+          <td *ngIf="warehouse.status; else deactive"> فعال</td>
+          <ng-template #deactive>
+            <td> غیر فعال</td>
+          </ng-template>
+        </tr>
+        </tbody>
+      </table>
+      <div class="" *ngIf="editMode">
+        <app-warehouse-edit></app-warehouse-edit>
+      </div>
+    </article>
+  </div>
+</div>

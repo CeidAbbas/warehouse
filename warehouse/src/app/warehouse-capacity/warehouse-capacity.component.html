@@ -1,0 +1,33 @@
+<div class="m-3 p-2">
+  <div class="card">
+    <header class="bg-light row m-0">
+      <h2 class="col-sm-7 lh-4"> {{ title }} {{ warehouseTitle }}</h2>
+      <div class="text-end col-sm-5 lh-lg">
+        <i class="fa fa-plus m-1 fa-2x"></i>
+        <i class="fa fa-search m-1 fa-2x"></i>
+        <i class="fa fa-refresh m-1 fa-2x"></i>
+      </div>
+    </header>
+    <article class="">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr class>
+          <th>نام كالا</th>
+          <th>موجودی</th>
+          <th>واحد</th>
+          <th>تاريخ انقضاء</th>
+<!--          <th></th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="" *ngFor="let warehouseCapacity of warehouseCapacity">
+          <td> {{ warehouseCapacity.name }}</td>
+          <td> {{ warehouseCapacity.capacity }}</td>
+          <td> {{ warehouseCapacity.unit }}</td>
+          <td> {{ warehouseCapacity.expirationDate }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+</div>
