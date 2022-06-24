@@ -14,4 +14,8 @@ export class PersonService {
   getAllPerson():Observable<Person[]> {
     return this.httpClient.get<Person[]>(`${this.baseUrl}/getAll`);
   }
+
+  savePerson(person:Person):Observable<Object>{
+    return this.httpClient.post(`${this.baseUrl}/save`, person);
+  }
 }
