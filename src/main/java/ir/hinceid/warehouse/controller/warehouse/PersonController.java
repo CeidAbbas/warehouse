@@ -1,5 +1,6 @@
-package ir.hinceid.warehouse.controller;
+package ir.hinceid.warehouse.controller.warehouse;
 
+import ir.hinceid.warehouse.controller.general.BaseController;
 import ir.hinceid.warehouse.model.general.Person;
 import ir.hinceid.warehouse.repository.interfaces.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-@CrossOrigin
 @RestController
 @RequestMapping("/rest/person")
-public class PersonController extends Controller{
+public class PersonController extends BaseController {
 
     @Autowired
     private IPersonRepository iPersonRepository;
@@ -26,7 +26,7 @@ public class PersonController extends Controller{
     }
 
     // load
-    @GetMapping("load/personId")
+    @GetMapping("load/{personId}")
     public Optional<Person> loadPerson(@PathVariable String personId) {
         return iPersonRepository.findById(UUID.fromString(personId));
     }
