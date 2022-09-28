@@ -1,9 +1,18 @@
 package ir.hinceid.warehouse.repository.body.reference;
 
+import ir.hinceid.warehouse.model.references.BaseInformation;
+import ir.hinceid.warehouse.repository.interfaces.reference.IBaseInformationRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class BaseInformationRepository { //extends BaseRepository<BaseInformation, UUID> implements IBaseInformationRepository {
+public abstract class BaseInformationRepository implements IBaseInformationRepository {
+    @Override
+    public List<BaseInformation> getByHierarchy(String hierarchy) {
+        String hql = " FROM ";
+        return null;
+    } //extends BaseRepository<BaseInformation, UUID> implements IBaseInformationRepository {
 
 ////    @Override
 //    public List<BaseInformation> loadByWareType() {
