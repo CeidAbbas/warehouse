@@ -8,10 +8,10 @@
         <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <groupId>ir.hinceid</groupId>
     <artifactId>warehouse</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>warehouse</name>
     <description>warehouse</description>
     <properties>
@@ -26,7 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -66,6 +65,7 @@
                 </configuration>
             </plugin>
         </plugins>
+<!--            <finalName>warehouse</finalName>-->
     </build>
 
 </project>

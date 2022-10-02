@@ -7,6 +7,7 @@ import ir.hinceid.warehouse.repository.interfaces.IWareRepository;
 import ir.hinceid.warehouse.repository.interfaces.reference.IBaseInformationRepository;
 import ir.hinceid.warehouse.viewModel.warehouse.WareViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -18,6 +19,7 @@ public class WareController extends BaseController {
     @Autowired
     private IWareRepository iWareRepository;
 
+    @Qualifier("IBaseInformationRepository")
     @Autowired
     private IBaseInformationRepository iBaseInformationRepository;
 
@@ -31,9 +33,9 @@ public class WareController extends BaseController {
             Optional<BaseInformation> baseInformationWareUnit = iBaseInformationRepository.findById(ware.getWareUnit().getId());
             WareViewModel wareViewModel = new WareViewModel();
             wareViewModel.setTypeId(baseInformationWareType.get().getId().toString());
-            wareViewModel.setTypeTitle(baseInformationWareType.get().getWareType());
+            wareViewModel.setTypeTitle(baseInformationWareType.get().getLabel());
             wareViewModel.setUnitId(baseInformationWareUnit.get().getId().toString());
-            wareViewModel.setUnitTitle(baseInformationWareUnit.get().getWareUnit());
+            wareViewModel.setUnitTitle(baseInformationWareUnit.get().getLabel());
             wareViewModel.setName(ware.getName());
             wareViewModel.setStatus(ware.getStatus());
             wareViewModel.setId(ware.getId().toString());

@@ -3,6 +3,7 @@ package ir.hinceid.warehouse.controller.reference;
 import ir.hinceid.warehouse.controller.general.BaseController;
 import ir.hinceid.warehouse.model.references.BaseInformation;
 import ir.hinceid.warehouse.repository.interfaces.reference.IBaseInformationRepository;
+import ir.hinceid.warehouse.viewModel.reference.BaseInformationViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,22 @@ public class BaseInformationController extends BaseController {
 
     // getAll
     @GetMapping("getAll")
-    public List<BaseInformation> getAllBaseInformation() {
-        List<BaseInformation> baseInformations = new ArrayList<BaseInformation>();
-        baseInformations = iBaseInformationRepository.findAll();
-//        List<BaseInformation> base = baseInformations.stream().filter(baseInformation -> {
-//            return (Integer)baseInformation.getHierarchy() < 1000;
-//        });
-        return baseInformations;
+    public List<BaseInformationViewModel> getAllBaseInformation() {
+        List<BaseInformation> baseInformations = iBaseInformationRepository.findAll();
+        List<BaseInformationViewModel> baseInformationViewModels = new ArrayList<>();
+        baseInformations.forEach(baseInformation -> {
+            BaseInformationViewModel baseInformationViewModel = new BaseInformationViewModel();
+            baseInformationViewModel.setLabel(baseInformation.getLabel());
+            baseInformationViewModel.setIcon(baseInformation.getIcon());
+            baseInformationViewModel.setCollapsedIcon(baseInformation.getCollapsedIcon());
+            baseInformationViewModel.setExpandedIcon(baseInformation.getExpandedIcon());
+            baseInformationViewModel.setHierarchy(baseInformation.getHierarchy());
+            baseInformationViewModel.setId(baseInformation.getId().toString());
+            if (baseInformation.getParent() != null)
+                baseInformationViewModel.setParent(baseInformation.getParent().getId().toString());
+            baseInformationViewModels.add(baseInformationViewModel);
+        });
+        return baseInformationViewModels;
     }
 
     // load
@@ -46,7 +56,7 @@ public class BaseInformationController extends BaseController {
      * @return
      */
     @PostMapping("save/{parent}")
-    public BaseInformation saveBaseInformation(@RequestBody BaseInformation baseInformation,@PathVariable String parent) {
+    public BaseInformation saveBaseInformation(@RequestBody BaseInformation baseInformation, @PathVariable String parent) {
 //        List<BaseInformation> baseInformations = iBaseInformationRepository.loadByWareType();
         if (baseInformation.getId() == null) {
             baseInformation.setId(UUID.randomUUID());
