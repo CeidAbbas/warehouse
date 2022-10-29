@@ -2,6 +2,8 @@ package ir.hinceid.warehouse.repository.body.warehouse;
 
 import ir.hinceid.warehouse.model.warhouse.WarehouseInventory;
 import ir.hinceid.warehouse.repository.interfaces.warehouse.IWarehouseInventoryRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import java.util.function.Function;
 @Repository
 public class WarehouseInventoryRepository implements IWarehouseInventoryRepository { //extends BaseRepository<WarehouseInventory, UUID> implements IWarehouseInventoryRepository {
 
+    private static SessionFactory sessionFactory;
     @Override
     public List<WarehouseInventory> getByWarehouseId(UUID warehouseId) {
 //        HashMap<String, Object> param = new HashMap<String, Object>();
@@ -27,6 +30,15 @@ public class WarehouseInventoryRepository implements IWarehouseInventoryReposito
 //        return getAllBy(hql);
     }
 
+//    private static Session getSession() {
+//        if (sessionFactory == null)
+//            sessionFactory = new DatabaseConfigBuilder
+//    }
+
+//    @Override
+//    public WarehouseInventory loadBy(){
+//        return new WarehouseInventory();
+//    }
 //    @Override
 //    public List<WarehouseInventory> getAllBy(String hql) {
 //        return null;

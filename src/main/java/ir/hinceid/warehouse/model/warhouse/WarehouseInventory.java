@@ -32,9 +32,9 @@ public class WarehouseInventory extends BaseModel {
     @JoinColumn(name = "person_id")
     public Person producer;
 
-    @ManyToOne
-    @JoinColumn(name = "forwarding_id")
-    public Forwarding forwarding;
+//    @ManyToOne
+//    @JoinColumn(name = "forwarding_id")
+//    public Forwarding forwarding;
 
     @ManyToOne
     @JoinColumn(name = "reference_id")
@@ -47,6 +47,7 @@ public class WarehouseInventory extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "delivery_healthy_status_id")
     public BaseInformation deliveryHealthyStatus;
+
     @ManyToOne
     @JoinColumn(name = "buy_origin_id")
     public BaseInformation buyOrigin;

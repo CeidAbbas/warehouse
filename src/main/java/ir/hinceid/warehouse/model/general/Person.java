@@ -37,4 +37,8 @@ public class Person extends BaseModel {
 
     @Column(name = "gender")
     public Integer gender;
+
+    public String getFullName() {
+        return this.getFirstName() + " " + this.getLastName();
+    }
 }
