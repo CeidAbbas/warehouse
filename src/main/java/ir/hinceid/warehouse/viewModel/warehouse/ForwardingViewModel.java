@@ -9,9 +9,14 @@ import lombok.Setter;
 public class ForwardingViewModel extends BaseViewModel {
 
     private String transporterId;
+    private String transporterFullName;
     private String packagesId;
+    private String packagesBarcode;
+    private String packagesColor;
     private String carrierId;
+    private String carrierTitle;
     private String receiverId;
+    private String receiverFullName;
     private String transportDate;
     private String receiveDate;
     private String receiveReport;

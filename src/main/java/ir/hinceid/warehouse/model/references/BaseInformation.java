@@ -15,14 +15,6 @@ import javax.persistence.Table;
 @Table(name = "baseinformation")
 public class BaseInformation extends BaseModel {
 
-//    public String wareType;
-//
-//    public UUID wareTypeParent;
-//
-//    public String gender;
-//
-//    public String wareUnit;
-
     public String label;
 
     public String icon;

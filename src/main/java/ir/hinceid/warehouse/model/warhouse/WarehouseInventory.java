@@ -33,8 +33,8 @@ public class WarehouseInventory extends BaseModel {
     public Person producer;
 
 //    @ManyToOne
-//    @JoinColumn(name = "forwarding_id")
-//    public Forwarding forwarding;
+//    @JoinColumn(name = "warehouse_destination_id")
+//    public Warehouse warehouseDestination;
 
     @ManyToOne
     @JoinColumn(name = "reference_id")

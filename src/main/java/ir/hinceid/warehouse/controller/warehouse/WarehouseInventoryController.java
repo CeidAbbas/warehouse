@@ -48,8 +48,9 @@ public class WarehouseInventoryController extends BaseController {
                 warehouseInventoryViewModel.setProducerId(warehouseInventory.getProducer().getId().toString());
                 warehouseInventoryViewModel.setProducerName(warehouseInventory.getProducer().getFullName());
             }
-//            if (warehouseInventory.getForwarding() != null)
-//                warehouseInventoryViewModel.setForwardingId(warehouseInventory.getForwarding().getId().toString());
+//            if (warehouseInventory.getWarehouseDestination() != null)
+//                warehouseInventoryViewModel.setWarehouseDestinationId(warehouseInventory.getWarehouseDestination().getId().toString());
+//                warehouseInventoryViewModel.setWarehouseDestinationTitle(warehouseInventory.getWarehouseDestination().getName());
             if (warehouseInventory.getReference() != null)
                 warehouseInventoryViewModel.setReferenceId(warehouseInventory.getReference().getId().toString());
             if (warehouseInventory.getWarehouseHealthyStatus() != null) {
@@ -154,6 +155,11 @@ public class WarehouseInventoryController extends BaseController {
         ware.setId(UUID.fromString(warehouseInventoryViewModel.getWareId()));
         warehouseInventory.setWare(ware);
         }
+//        if (warehouseInventoryViewModel.getWarehouseDestinationId() != null) {
+//            Warehouse warehouseDestination = new Warehouse();
+//            warehouseDestination.setId(UUID.fromString(warehouseInventoryViewModel.getWarehouseDestinationId()));
+//            warehouseInventory.setWarehouseDestination(warehouseDestination);
+//        }
         if (warehouseInventoryViewModel.getProducerId() != null) {
             Person producer = new Person();
             producer.setId(UUID.fromString(warehouseInventoryViewModel.getProducerId()));

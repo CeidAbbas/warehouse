@@ -9,6 +9,8 @@ import lombok.Setter;
 public class WarehouseInventoryViewModel extends BaseViewModel {
     public String warehouseId;
     public String warehouseTitle;
+//    public String warehouseDestinationId;
+//    public String warehouseDestinationTitle;
     public String wareId;
     public String wareName;
     public String producerId;
