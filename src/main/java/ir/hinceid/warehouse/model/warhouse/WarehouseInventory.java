@@ -2,6 +2,7 @@ package ir.hinceid.warehouse.model.warhouse;
 
 //import com.sun.istack.NotNull;
 import ir.hinceid.warehouse.model.general.BaseModel;
+import ir.hinceid.warehouse.model.general.FileStorage;
 import ir.hinceid.warehouse.model.general.Person;
 import ir.hinceid.warehouse.model.references.BaseInformation;
 import lombok.Getter;
@@ -32,9 +33,9 @@ public class WarehouseInventory extends BaseModel {
     @JoinColumn(name = "person_id")
     public Person producer;
 
-//    @ManyToOne
-//    @JoinColumn(name = "warehouse_destination_id")
-//    public Warehouse warehouseDestination;
+    @ManyToOne
+    @JoinColumn(name = "warehouse_inventory_file")
+    public FileStorage warehouseInventoryFile;
 
     @ManyToOne
     @JoinColumn(name = "reference_id")

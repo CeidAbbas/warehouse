@@ -4,6 +4,7 @@ import ir.hinceid.warehouse.controller.general.BaseController;
 import ir.hinceid.warehouse.model.general.Person;
 import ir.hinceid.warehouse.model.warhouse.Warehouse;
 import ir.hinceid.warehouse.model.warhouse.WarehouseResponsible;
+import ir.hinceid.warehouse.repository.body.WarehouseResponsibleRepository;
 import ir.hinceid.warehouse.repository.interfaces.IPersonRepository;
 import ir.hinceid.warehouse.repository.interfaces.IWarehouseRepository;
 import ir.hinceid.warehouse.repository.interfaces.IWarehouseResponsibleRepository;
@@ -21,6 +22,9 @@ public class WarehouseResponsibleController extends BaseController {
     private IWarehouseResponsibleRepository iWarehouseResponsibleRepository;
 
     @Autowired
+    private WarehouseResponsibleRepository warehouseResponsibleRepository;
+
+    @Autowired
     private IPersonRepository iPersonRepository;
 
     @Autowired
@@ -29,7 +33,11 @@ public class WarehouseResponsibleController extends BaseController {
     // getAll
     @GetMapping("getAll")
     public List<WarehouseResponsibleViewModel> getAllWarehouseResponsible() {
-        List<WarehouseResponsible> warehouseResponsibles = iWarehouseResponsibleRepository.findAll();
+        WarehouseResponsibleRepository warehouseResponsibleRepository = new WarehouseResponsibleRepository();
+//        List<WarehouseResponsible> warehouseResponsibles = warehouseResponsibleRepository.loadAll();
+//        @Query(" FROM WarehouseResponsible e WHERE status = :flag ")
+        List<WarehouseResponsible> warehouseResponsibles = iWarehouseResponsibleRepository.findByStatus(true);
+//        List<WarehouseResponsible> warehouseResponsibles = warehouseResponsibleRepository.findByAll();
         List<WarehouseResponsibleViewModel> warehouseResponsibleViewModels = new ArrayList<WarehouseResponsibleViewModel>();
         warehouseResponsibles.forEach(warehouseResponsible -> {
             WarehouseResponsibleViewModel warehouseResponsibleViewModel = new WarehouseResponsibleViewModel();

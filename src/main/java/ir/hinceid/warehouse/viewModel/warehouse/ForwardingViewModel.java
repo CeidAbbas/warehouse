@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class ForwardingViewModel extends BaseViewModel {
 
+    private String id;
     private String transporterId;
     private String transporterFullName;
     private String packagesId;

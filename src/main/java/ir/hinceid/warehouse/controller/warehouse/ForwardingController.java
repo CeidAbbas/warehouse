@@ -4,11 +4,14 @@ import ir.hinceid.warehouse.controller.general.BaseController;
 import ir.hinceid.warehouse.model.general.Person;
 import ir.hinceid.warehouse.model.references.BaseInformation;
 import ir.hinceid.warehouse.model.warhouse.Forwarding;
+import ir.hinceid.warehouse.model.warhouse.ForwardingPackage;
 import ir.hinceid.warehouse.model.warhouse.Package;
 import ir.hinceid.warehouse.repository.interfaces.IPersonRepository;
 import ir.hinceid.warehouse.repository.interfaces.reference.IBaseInformationRepository;
+import ir.hinceid.warehouse.repository.interfaces.warehouse.IForwardingPackageRepository;
 import ir.hinceid.warehouse.repository.interfaces.warehouse.IForwardingRepository;
 import ir.hinceid.warehouse.repository.interfaces.warehouse.IPackageRepository;
+import ir.hinceid.warehouse.viewModel.warehouse.ForwardingPackageViewModel;
 import ir.hinceid.warehouse.viewModel.warehouse.ForwardingViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,12 +44,17 @@ public class ForwardingController extends BaseController {
     @Autowired
     private IBaseInformationRepository iBaseInformationRepository;
 
+    @Qualifier("IForwardingPackageRepository")
+    @Autowired
+    private IForwardingPackageRepository iForwardingPackageRepository;
+
     @GetMapping("/getAll")
     public List<ForwardingViewModel> getAllForwarding() {
         List<Forwarding> forwardings = iForwardingRepository.findAll();
         List<ForwardingViewModel> forwardingViewModels = new ArrayList<ForwardingViewModel>();
         forwardings.forEach(forwarding -> {
             ForwardingViewModel forwardingViewModel = new ForwardingViewModel();
+            forwardingViewModel.setId(forwarding.getId().toString());
             if (forwarding.getTransporter() != null) {
                 forwardingViewModel.setTransporterId(forwarding.getTransporter().getId().toString());
                 forwardingViewModel.setTransporterFullName(forwarding.getTransporter().getFullName().toString());
@@ -106,5 +114,22 @@ public class ForwardingController extends BaseController {
         forwarding.setDescription(entityViewModel.getDescription());
         forwarding.setCarrierNumber(entityViewModel.getCarrierNumber());
         return iForwardingRepository.save(forwarding);
+    }
+
+    @Transactional
+    @PostMapping("/addPackageToForwarding")
+    public ForwardingPackage addPackageToForwarding(@RequestBody ForwardingPackageViewModel forwardingPackageViewModel) {
+        ForwardingPackage forwardingPackage = new ForwardingPackage();
+        Optional<Forwarding> forwarding = iForwardingRepository.findById(UUID.fromString(forwardingPackageViewModel.forwardingId));
+        Optional<Package> packages = iPackageRepository.findById(UUID.fromString(forwardingPackageViewModel.packageId));
+        forwardingPackage.setPackages(packages.get());
+        forwardingPackage.setForwarding(forwarding.get());
+        return iForwardingPackageRepository.save(forwardingPackage);
+    }
+
+    @GetMapping("/getForwardingPackage/{forwardingId}")
+    public List<ForwardingPackage> getForwardingPackage(@PathVariable String forwardingId) {
+        Optional<Forwarding> forwarding = iForwardingRepository.findById(UUID.fromString(forwardingId));
+        return iForwardingPackageRepository.getByForwarding(forwarding.orElseGet(Forwarding::new));
     }
 }

@@ -15,8 +15,8 @@ import java.util.UUID;
 import java.util.function.Function;
 
 @Repository
-public class PackageWarehouseInventoryRepository implements IPackageWarehouseInventoryRepository {
-    @Override
+public class PackageWarehouseInventoryRepository {
+    /*@Override
     public List<PackageWarehouseInventory> findAll() {
         return null;
     }
@@ -164,5 +164,5 @@ public class PackageWarehouseInventoryRepository implements IPackageWarehouseInv
     @Override
     public <S extends PackageWarehouseInventory, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return null;
-    }
+    }*/
 }

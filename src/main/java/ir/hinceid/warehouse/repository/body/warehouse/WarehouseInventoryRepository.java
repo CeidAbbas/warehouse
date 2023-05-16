@@ -20,6 +20,7 @@ import java.util.function.Function;
 public class WarehouseInventoryRepository implements IWarehouseInventoryRepository { //extends BaseRepository<WarehouseInventory, UUID> implements IWarehouseInventoryRepository {
 
     private static SessionFactory sessionFactory;
+
     @Override
     public List<WarehouseInventory> getByWarehouseId(UUID warehouseId) {
 //        HashMap<String, Object> param = new HashMap<String, Object>();

@@ -33,17 +33,23 @@ public class PackageWarehouseInventoryController extends BaseController {
     @Autowired
     private IPackageRepository iPackageRepository;
 
+    @GetMapping("/load/{packageId}")
+    public List<PackageWarehouseInventory> getByPackageId(@PathVariable String packageId) {
+        Optional<Package> packages = iPackageRepository.findById(UUID.fromString(packageId));
+        return iPackageWarehouseInventoryRepository.getByPackages(packages.get());
+    }
+
     @Transactional
     @PostMapping("save")
-    public Boolean savePackageWarehouseInventory(@RequestBody List<PackageWarehouseInventoryViewModel> packageWarehouseInventoryViewModels) {
-        packageWarehouseInventoryViewModels.forEach(packageWarehouseInventoryViewModel -> {
+    public PackageWarehouseInventory savePackageWarehouseInventory(@RequestBody PackageWarehouseInventoryViewModel packageWarehouseInventoryViewModel) {
+//    public Boolean savePackageWarehouseInventory(@RequestBody List<PackageWarehouseInventoryViewModel> packageWarehouseInventoryViewModels) {
+//        packageWarehouseInventoryViewModels.forEach(packageWarehouseInventoryViewModel -> {
             PackageWarehouseInventory packageWarehouseInventory = new PackageWarehouseInventory();
             Optional<WarehouseInventory> warehouseInventory = iWarehouseInventoryRepository.findById(UUID.fromString(packageWarehouseInventoryViewModel.warehouseInventoryId));
             Optional<Package> packages = iPackageRepository.findById(UUID.fromString(packageWarehouseInventoryViewModel.packageId));
             packageWarehouseInventory.setWarehouseInventory(warehouseInventory.get());
             packageWarehouseInventory.setPackages(packages.get());
-            iPackageWarehouseInventoryRepository.save(packageWarehouseInventory);
-        });
-        return true;
+        return iPackageWarehouseInventoryRepository.save(packageWarehouseInventory);
+//        });                                                                                                   `
     }
 }

@@ -12,6 +12,10 @@ public interface IWarehouseInventoryRepository extends JpaRepository<WarehouseIn
 
     List<WarehouseInventory> getByWarehouseId(UUID warehouseId);
 
+//    List<WarehouseInventory> getByWarehouseInventory(UUID warehouseInventoryId);
+
+//    List<WarehouseInventory> g
+
 //    WarehouseInventory loadBy();
 
 //    List<WarehouseInventory> getAllBy(String hql);

@@ -1,17 +1,26 @@
 package ir.hinceid.warehouse.controller.warehouse;
 
 import ir.hinceid.warehouse.controller.general.BaseController;
+import ir.hinceid.warehouse.model.general.FileStorage;
 import ir.hinceid.warehouse.model.general.Person;
 import ir.hinceid.warehouse.model.references.BaseInformation;
 import ir.hinceid.warehouse.model.warhouse.Ware;
 import ir.hinceid.warehouse.model.warhouse.Warehouse;
 import ir.hinceid.warehouse.model.warhouse.WarehouseInventory;
+import ir.hinceid.warehouse.repository.interfaces.general.IFileStorageRepository;
 import ir.hinceid.warehouse.repository.interfaces.warehouse.IWarehouseInventoryRepository;
+import ir.hinceid.warehouse.service.general.FileStorageService;
 import ir.hinceid.warehouse.viewModel.warehouse.WarehouseInventoryViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContextException;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -21,6 +30,12 @@ public class WarehouseInventoryController extends BaseController {
     @Qualifier("IWarehouseInventoryRepository")
     @Autowired
     private IWarehouseInventoryRepository iWarehouseInventoryRepository;
+
+    @Autowired
+    private FileStorageService fileStorageService;
+
+    @Autowired
+    private IFileStorageRepository iFileStorageRepository;
 
 //    @Autowired
 //    private IWarehouseInventoryRepository warehouseInventoryRepository;
@@ -140,8 +155,26 @@ public class WarehouseInventoryController extends BaseController {
         return Optional.empty();
     }
 
+
+    @PostMapping("saveFile/{warehouseInventoryId}")
+    @Transactional
+//    public WarehouseInventory saveWarehouseInventory(@RequestBody WarehouseInventoryViewModel warehouseInventoryViewModel, @RequestParam("file") File file) throws IOException {
+    public WarehouseInventory saveWarehouseInventoryFile(@RequestPart("file")MultipartFile file, @PathVariable String warehouseInventoryId) throws IOException {
+
+        FileStorage fileStorage = new FileStorage(file.getOriginalFilename(), file.getBytes(), UUID.fromString(warehouseInventoryId),"warehouseInventory");
+        FileStorage savedFileStorage = iFileStorageRepository.save(fileStorage);
+        return null;
+    }
+
     @PostMapping("save")
-    public WarehouseInventory saveWarehouseInventory(@RequestBody WarehouseInventoryViewModel warehouseInventoryViewModel) {
+    @Transactional
+//    public WarehouseInventory saveWarehouseInventory(@RequestBody WarehouseInventoryViewModel warehouseInventoryViewModel, @RequestParam("file") File file) throws IOException {
+    public WarehouseInventory saveWarehouseInventory(@RequestPart("file")MultipartFile file) throws IOException {
+
+        FileStorage fileStorage = new FileStorage(file.getOriginalFilename(), file.getBytes());
+        FileStorage savedFileStorage = iFileStorageRepository.save(fileStorage);
+        WarehouseInventoryViewModel warehouseInventoryViewModel = new WarehouseInventoryViewModel();
+//    public WarehouseInventory saveWarehouseInventory(@RequestBody WarehouseInventoryViewModel warehouseInventoryViewModel, @RequestPart("file")MultipartFile file) throws IOException {
         WarehouseInventory warehouseInventory = new WarehouseInventory();
         if (warehouseInventoryViewModel.getId() == null || Objects.equals(warehouseInventory.getId(), ""))
             warehouseInventory.setId(UUID.randomUUID());
@@ -203,12 +236,24 @@ public class WarehouseInventoryController extends BaseController {
             warehouseInventory.setExpirationDate(warehouseInventoryViewModel.getExpirationDate());
         if (warehouseInventoryViewModel.getAppurtenance() != null)
             warehouseInventory.setAppurtenance(warehouseInventoryViewModel.getAppurtenance());
+//        if (file.isEmpty()) {
+//            FileStorage fileStorage = fileStorageService.saveFile(warehouseInventoryViewModel.getWarehouseInventoryFile());
+//            warehouseInventory.setWarehouseInventoryFile(fileStorage);
+//        }
         warehouseInventory.setCreatedDate(new Date());
-        return iWarehouseInventoryRepository.save(warehouseInventory);
+//        throw new ApplicationContextException("a");
+        return iWarehouseInventoryRepository.save(new WarehouseInventory());
     }
 
     @DeleteMapping("delete/{warehouseInventoryId}")
     public void deleteWarehouseInventory(@PathVariable String warehouseInventoryId) {
         iWarehouseInventoryRepository.deleteById(UUID.fromString(warehouseInventoryId));
+    }
+
+    @GetMapping("getImage/{imageId}")
+    public List<FileStorage> getImage(@PathVariable("imageId") String imageId) throws IOException {
+
+        List<FileStorage> byRelatedAndScope = iFileStorageRepository.findByRelatedAndScope(UUID.fromString(imageId), "warehouseInventory");
+        return byRelatedAndScope;
     }
 }

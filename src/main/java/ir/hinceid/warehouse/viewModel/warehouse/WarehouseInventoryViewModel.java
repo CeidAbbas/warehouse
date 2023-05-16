@@ -3,6 +3,7 @@ package ir.hinceid.warehouse.viewModel.warehouse;
 import ir.hinceid.warehouse.viewModel.general.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -32,4 +33,5 @@ public class WarehouseInventoryViewModel extends BaseViewModel {
     public String color;
     public String expirationDate;
     public String appurtenance;
+    public MultipartFile warehouseInventoryFile;
 }
